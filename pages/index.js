@@ -1,4 +1,5 @@
 import Head from 'next/head';
+import Login from '../components/Login';
 
 export default function Home() {
 	return (
@@ -6,7 +7,7 @@ export default function Home() {
 			<Head>
 				<title>Next.JS TODO App</title>
 			</Head>
-			<h1>Hello, World!</h1>
+			<Login />
 		</>
 	);
 }
