@@ -6,30 +6,29 @@ import {
 	signOut,
 	onAuthStateChanged,
 } from 'firebase/auth';
-import { doc, getDoc } from 'firebase/firestore';
 
 const AuthContext = React.createContext();
 
-export function useAuth() {
+export const useAuth = () => {
 	return useContext(AuthContext);
-}
+};
 
 export function AuthProvider({ children }) {
 	const [currentUser, setCurrentUser] = useState(null);
 	const [loading, setLoading] = useState(true);
 
-	function signUp(email, password) {
+	const signUp = (email, password) => {
 		createUserWithEmailAndPassword(auth, email, password);
 		return;
-	}
+	};
 
-	function logIn(email, password) {
+	const logIn = (email, password) => {
 		return signInWithEmailAndPassword(auth, email, password);
-	}
+	};
 
-	function logOut() {
+	const logOut = () => {
 		return signOut(auth);
-	}
+	};
 
 	useEffect(() => {
 		const unSub = onAuthStateChanged(auth, async (user) => {
