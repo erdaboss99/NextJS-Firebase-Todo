@@ -75,6 +75,11 @@ const Dashboard = () => {
 					Add
 				</button>
 			</div>
+			{error && (
+				<div className='w-full border-rose-400 border border-solid text-rose-400 text-center py-2'>
+					{error}
+				</div>
+			)}
 			{loading && (
 				<div className='flex-1 grid place-items-center'>
 					<i className='fa-solid fa-spinner animate-spin text-6xl'></i>
