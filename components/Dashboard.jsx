@@ -1,5 +1,5 @@
 import React, { useState } from 'react';
-import { doc, setDoc } from 'firebase/firestore';
+import { deleteField, doc, setDoc } from 'firebase/firestore';
 import { useAuth } from '../context/AuthContext';
 import { db } from '../firebase';
 import useFetchTodos from '../hooks/fetchTodos';
@@ -59,6 +59,25 @@ const Dashboard = () => {
 		};
 	};
 
+	const handleDelete = (todoKey) => {
+		return async () => {
+			const tempObj = { ...todos };
+			delete tempObj[todoKey];
+
+			setTodos(tempObj);
+			const userRef = doc(db, 'users', currentUser.uid);
+			await setDoc(
+				userRef,
+				{
+					todos: {
+						[todoKey]: deleteField(),
+					},
+				},
+				{ merge: true },
+			);
+		};
+	};
+
 	return (
 		<div className='w-full max-w-[65ch] text-xs sm:text-sm mx-auto flex flex-col flex-1 gap-3 sm:gap-5'>
 			<div className='flex items-stretch'>
@@ -96,7 +115,8 @@ const Dashboard = () => {
 								edit={edit}
 								todoKey={todo}
 								edittedValue={edittedValue}
-								setEdittedValue={setEdittedValue}>
+								setEdittedValue={setEdittedValue}
+								handleDelete={handleDelete}>
 								{todos[todo]}
 							</TodoCard>
 						);

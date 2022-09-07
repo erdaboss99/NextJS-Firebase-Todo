@@ -1,8 +1,16 @@
 import React from 'react';
 
 const TodoCard = (props) => {
-	const { children, handleEditTodo, handleAddEdit, edit, todoKey, edittedValue, setEdittedValue } =
-		props;
+	const {
+		children,
+		handleEditTodo,
+		handleAddEdit,
+		edit,
+		todoKey,
+		edittedValue,
+		setEdittedValue,
+		handleDelete,
+	} = props;
 	return (
 		<div className='p-2 relative sm:p-3 border flex items-stretch border-white border-solid '>
 			<div className='flex-1 flex'>
@@ -26,7 +34,9 @@ const TodoCard = (props) => {
 						onClick={handleAddEdit(todoKey)}
 						className='fa-solid fa-pencil px-2 duration-300 hover:rotate-45 cursor-pointer'></i>
 				)}
-				<i className='fa-solid fa-trash-can px-2 duration-300 hover:scale-125 cursor-pointer'></i>
+				<i
+					onClick={handleDelete(todoKey)}
+					className='fa-solid fa-trash-can px-2 duration-300 hover:scale-125 cursor-pointer'></i>
 			</div>
 		</div>
 	);
