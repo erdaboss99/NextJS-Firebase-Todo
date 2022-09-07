@@ -1,7 +1,7 @@
 import React, { useState } from 'react';
 import Modal from './Modal';
 
-function Header() {
+const Header = () => {
 	const [openModal, setOpenModal] = useState(false);
 
 	return (
@@ -15,6 +15,6 @@ function Header() {
 			</div>
 		</>
 	);
-}
+};
 
 export default Header;

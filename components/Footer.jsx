@@ -1,8 +1,8 @@
 import React from 'react';
 
-function Footer() {
+const Footer = () => {
 	return (
-		<div className='flex justify-center gap-5 py-3'>
+		<div className='flex justify-center items-center gap-5 py-3'>
 			<a href='https://www.instagram.com/erdelyiroland99/'>
 				<i className='fa-brands fa-instagram duration-300 hover:opacity-30 cursor-pointer'></i>
 			</a>
@@ -11,6 +11,6 @@ function Footer() {
 			</a>
 		</div>
 	);
-}
+};
 
 export default Footer;

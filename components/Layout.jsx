@@ -2,7 +2,7 @@ import React from 'react';
 import Header from '../components/Header';
 import Footer from '../components/Footer';
 
-function Layout(props) {
+const Layout = (props) => {
 	const { children } = props;
 	return (
 		<div className='flex flex-col min-h-screen relative bg-slate-900 text-white'>
@@ -11,6 +11,6 @@ function Layout(props) {
 			<Footer />
 		</div>
 	);
-}
+};
 
 export default Layout;

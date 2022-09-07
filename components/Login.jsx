@@ -1,13 +1,13 @@
 import React, { useState } from 'react';
 import { useAuth } from '../context/AuthContext';
 
-function Login() {
+const Login = () => {
 	const [email, setEmail] = useState('');
 	const [password, setPassword] = useState('');
 	const [error, setError] = useState(null);
 	const [isLogginIn, setIsLogginIn] = useState(true);
 
-	const { logIn, signUp, currentUser } = useAuth();
+	const { logIn, signUp } = useAuth();
 
 	const submitHandler = async () => {
 		if (!email || !password) {
@@ -62,6 +62,6 @@ function Login() {
 			</h2>
 		</div>
 	);
-}
+};
 
 export default Login;
