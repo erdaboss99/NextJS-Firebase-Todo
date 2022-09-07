@@ -7,7 +7,9 @@ import TodoCard from './TodoCard';
 
 const Dashboard = () => {
 	const { currentUser } = useAuth();
+	const [edit, setEdit] = useState(null);
 	const [todo, setTodo] = useState('');
+	const [edittedValue, setEdittedValue] = useState('');
 
 	const { todos, setTodos, loading, error } = useFetchTodos();
 
@@ -28,6 +30,33 @@ const Dashboard = () => {
 			{ merge: true },
 		);
 		setTodo('');
+	};
+
+	const handleEditTodo = async () => {
+		if (!edittedValue) {
+			return;
+		}
+		const newKey = edit;
+		setTodos({ ...todos, [newKey]: edittedValue });
+		const userRef = doc(db, 'users', currentUser.uid);
+		await setDoc(
+			userRef,
+			{
+				todos: {
+					[newKey]: edittedValue,
+				},
+			},
+			{ merge: true },
+		);
+		setEdit(null);
+		setEdittedValue('');
+	};
+
+	const handleAddEdit = (todoKey) => {
+		return () => {
+			setEdit(todoKey);
+			setEdittedValue(todos[todoKey]);
+		};
 	};
 
 	return (
@@ -54,7 +83,18 @@ const Dashboard = () => {
 			{!loading && (
 				<>
 					{Object.keys(todos).map((todo, i) => {
-						return <TodoCard key={i}>{todos[todo]}</TodoCard>;
+						return (
+							<TodoCard
+								key={i}
+								handleEditTodo={handleEditTodo}
+								handleAddEdit={handleAddEdit}
+								edit={edit}
+								todoKey={todo}
+								edittedValue={edittedValue}
+								setEdittedValue={setEdittedValue}>
+								{todos[todo]}
+							</TodoCard>
+						);
 					})}
 				</>
 			)}
