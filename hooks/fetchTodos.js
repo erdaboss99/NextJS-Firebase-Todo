@@ -22,12 +22,12 @@ const useFetchTodos = () => {
 				}
 			} catch (error) {
 				setError('Failed to load todos!');
-				console.log(err);
+				console.log(error);
 			} finally {
 				setLoading(false);
 			}
-			fetchData();
 		};
+		fetchData();
 	});
 
 	return { loading, error, todos, setTodos };
