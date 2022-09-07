@@ -13,7 +13,7 @@ export const useAuth = () => {
 	return useContext(AuthContext);
 };
 
-export function AuthProvider({ children }) {
+export const AuthProvider = ({ children }) => {
 	const [currentUser, setCurrentUser] = useState(null);
 	const [loading, setLoading] = useState(true);
 
@@ -45,4 +45,4 @@ export function AuthProvider({ children }) {
 		logOut,
 	};
 	return <AuthContext.Provider value={value}>{!loading && children}</AuthContext.Provider>;
-}
+};
