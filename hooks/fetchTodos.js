@@ -27,7 +27,7 @@ const useFetchTodos = () => {
 			}
 		};
 		fetchData();
-	});
+	}, []);
 
 	return { loading, error, todos, setTodos };
 };
